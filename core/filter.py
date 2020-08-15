@@ -3,12 +3,13 @@ from .models import Items,CATEGORIES_CHOICES
 
 class ItemsFilter(django_filters.FilterSet):
     model = Items
-    ordering = django_filters.ChoiceFilter(
+    """ordering = django_filters.ChoiceFilter(
         label='Categories',
         choices = CATEGORIES_CHOICES,
         method = 'sort_by_categories'
-    )
+    )"""
     title = django_filters.CharFilter(
+        #Customize the search bar design
         lookup_expr = 'icontains'
     )
 
