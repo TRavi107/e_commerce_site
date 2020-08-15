@@ -59,10 +59,11 @@
             <a href="{{ object.get_add_to_card_url }}" class="btn btn-primary btn-md my-0 p" >Add to cart
               <i class="fas fa-shopping-cart ml-1"></i>
             </a>
-            <a href="{{ object.get_remove_from_card_url }}" class="btn btn-danger btn-md my-0 p" >Remove from cart
-              
-            </a>
-
+            {% if request.user.is_authenticated %}
+              <!--Show this button only if user has this item on cart-->
+              <a href="{{ object.get_remove_from_card_url }}" class="btn btn-danger btn-md my-0 p" >Remove from cart
+              </a>
+            {% endif %}
           </div>
           <!--Content-->
 

@@ -19,7 +19,7 @@ LABEL_CHOICES = (
 
 class Items(models.Model):
     title = models.CharField(max_length=100)
-    #img = models.ImageField()
+    img = models.ImageField(blank=True,null=True,upload_to='items_img/')
     categories= models.CharField(choices=CATEGORIES_CHOICES,max_length=2)
     label= models.CharField(choices=LABEL_CHOICES,max_length=1,blank=True,null=True)
     price = models.IntegerField()
