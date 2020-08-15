@@ -45,7 +45,11 @@
 
           <form class="form-inline" method="GET">
             <div class="md-form my-0">
-              <input type="text" placeholder="search" >
+              <form action="" method="post">
+                {% csrf_token %}
+                {{filter.form.title}}
+                <label for="">Search</label>
+              </form>
             </div>
           </form>
         </div>
