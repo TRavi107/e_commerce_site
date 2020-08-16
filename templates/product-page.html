@@ -24,7 +24,7 @@
 
           <!--Content-->
           <div class="p-4">
-
+            <p class="lead font-weight-bold">{{object.title}}</p>
             <div class="mb-3">
               <a href="">
                 <span class="badge purple mr-1">{{object.get_categories_display}}</span>
@@ -74,6 +74,20 @@
       <!--Grid row-->
 
       <hr>
+
+      <div>
+        <form action="" method="POST">
+          {% csrf_token %}
+          {{ form }}
+          <button type="submit">Post</button>
+        </form>
+      </div>
+      <hr>
+      <div>
+        {% for com in comments %}
+          <h5>{{com.contents}}</h5>
+        {% endfor %}
+      </div>
 
       <!--Grid row-->
       <div class="row d-flex justify-content-center wow fadeIn">

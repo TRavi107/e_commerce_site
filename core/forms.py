@@ -18,3 +18,6 @@ class Checkoutform(forms.Form):
     same_billing_address = forms.BooleanField(required=False)
     save_info = forms.BooleanField(required=False)
     payment_option = forms.ChoiceField(widget=forms.RadioSelect,choices=PAYMENT_OPTIONS)
+
+class CommentForm(forms.Form):
+    contents = forms.CharField()

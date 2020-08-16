@@ -7,11 +7,12 @@ from .models import (
     Items,
     OrderItem,
     Order,
-    BillingAddress
+    BillingAddress,
+    Comments
 )
 from django.utils import timezone
 from django.contrib import messages
-from .forms import Checkoutform
+from .forms import Checkoutform,CommentForm
 from .filter import ItemsFilter
 # Create your views here.
 
@@ -26,10 +27,37 @@ class  HomeView(ListView):
         context['filter'] = ItemsFilter(self.request.GET,queryset=self.get_queryset())
         return context
 
+    
+
 
 class  ItemDetailView(DetailView):
     model = Items
     template_name = "product-page.html"
+
+    def get_context_data(self,*args,**kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = CommentForm()
+        comments =Comments.objects.all().filter(item = self.get_object())
+        context['comments'] = comments
+        return context
+
+    def post(self,*args,**kwargs):
+        form = CommentForm(self.request.POST or None)
+        item = self.get_object()
+        if form.is_valid() :
+            contents = form.cleaned_data.get("contents")
+            user = self.request.user
+            comment = Comments(
+                user=user,
+                contents=contents,
+                item = item
+            )
+            comment.save()
+            return redirect(".")
+
+        messages.info(self.request,"Form or item is invalid")
+        return redirect(".")
+
 
 class CheckOutView(LoginRequiredMixin,View):
     def get(self,*args,**kwargs):

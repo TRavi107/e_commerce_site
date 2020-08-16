@@ -45,6 +45,18 @@ class Items(models.Model):
             'slug':self.slug
         })
 
+class Comments(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                            on_delete=models.CASCADE)
+    contents = models.CharField(max_length=1000)
+    item = models.ForeignKey(Items,on_delete=models.CASCADE)
+    posted_time = models.TimeField(auto_now_add=True)
+    likes = models.IntegerField()
+    dislikes = models.IntegerField()
+
+    def __str__(self):
+        return self.contents
+
 class OrderItem(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                             on_delete=models.CASCADE)
