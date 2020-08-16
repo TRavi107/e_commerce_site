@@ -61,6 +61,7 @@ class Comments(models.Model):
     def get_posted_time(self):
         pass
 
+
 class OrderItem(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                             on_delete=models.CASCADE)
