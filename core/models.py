@@ -51,8 +51,8 @@ class Comments(models.Model):
     contents = models.CharField(max_length=1000)
     item = models.ForeignKey(Items,on_delete=models.CASCADE)
     posted_time = models.TimeField(auto_now_add=True)
-    likes = models.IntegerField()
-    dislikes = models.IntegerField()
+    likes = models.IntegerField(default=0)
+    dislikes = models.IntegerField(default=0)
 
     def __str__(self):
         return self.contents
