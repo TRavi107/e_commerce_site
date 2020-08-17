@@ -27,9 +27,6 @@ class  HomeView(ListView):
         context['filter'] = ItemsFilter(self.request.GET,queryset=self.get_queryset())
         return context
 
-    
-
-
 class  ItemDetailView(DetailView):
     model = Items
     template_name = "product-page.html"
@@ -46,7 +43,10 @@ class  ItemDetailView(DetailView):
         item = self.get_object()
         if form.is_valid() :
             contents = form.cleaned_data.get("contents")
-            user = self.request.user
+            if self.request.user.is_authenticated:
+                user = self.request.user
+            else:
+                user = None
             comment = Comments(
                 user=user,
                 contents=contents,

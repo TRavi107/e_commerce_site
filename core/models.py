@@ -47,7 +47,7 @@ class Items(models.Model):
 
 class Comments(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
-                            on_delete=models.CASCADE)
+                            on_delete=models.CASCADE,blank=True,null=True)
     contents = models.CharField(max_length=1000)
     item = models.ForeignKey(Items,on_delete=models.CASCADE)
     posted_time = models.TimeField(auto_now_add=True)
