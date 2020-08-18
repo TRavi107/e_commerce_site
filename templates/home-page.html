@@ -27,18 +27,18 @@
           <!-- Links -->
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#">All
+              <a class="nav-link" href="{% url 'core:home' %}">All
                 <span class="sr-only">(current)</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Shirts</a>
+              <a class="nav-link" href="{% url 'core:filter_by_categories' 'S' %}">Shirts</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Sport wears</a>
+              <a class="nav-link" href="{% url 'core:filter_by_categories' 'SW' %}">Sport wears</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href=""> Out Wear</a>
+              <a class="nav-link" href="{% url 'core:filter_by_categories' 'OW' %}"> Out Wear</a>
             </li>
           </ul>
           <!-- Links -->
@@ -63,7 +63,6 @@
         <!--Grid row-->
         <div class="row wow fadeIn">
           
-
         {% for item in filter.qs %}
           
           <div class="col-lg-3 col-md-6 mb-4">

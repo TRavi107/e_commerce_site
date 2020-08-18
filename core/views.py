@@ -28,6 +28,16 @@ class  HomeView(ListView):
         context['filter'] = ItemsFilter(self.request.GET,queryset=self.get_queryset())
         return context
 
+def filter_by_categories(request,categories):
+    items = Items.objects.all()
+    queryset = items.filter(categories=categories)
+    filter = ItemsFilter(request.GET,queryset=queryset)
+    context = {
+        'queryset':queryset,
+        'filter':filter
+    }
+    return render(request,"home-page.html",context=context)
+
 class  ItemDetailView(DetailView):
     model = Items
     template_name = "product-page.html"
