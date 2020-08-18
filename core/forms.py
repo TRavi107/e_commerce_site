@@ -20,7 +20,7 @@ class Checkoutform(forms.Form):
     payment_option = forms.ChoiceField(widget=forms.RadioSelect,choices=PAYMENT_OPTIONS)
 
 class CommentForm(forms.Form):
-    contents = forms.CharField(widget=forms.Textarea(attrs={
+    contents = forms.CharField(widget=forms.TextInput(attrs={
         'placeholder':'Write your comment here!',
         'class':'pb-cmnt-textarea'
     }))
