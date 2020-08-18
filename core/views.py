@@ -3,6 +3,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.views.generic import ListView,DetailView,View
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import JsonResponse
 from .models import (
     Items,
     OrderItem,
@@ -227,6 +228,22 @@ def add_to_cart_c(request,slug):
         order_item.save()
         order.items.add(order_item)
         return redirect("core:CheckOutView")
+
+def like_the_comment(request,id):
+    comment = get_object_or_404(Comments,id=id)
+    if comment != None:
+        comment.likes +=1
+        comment.save()
+        comm ={
+            'contents':comment.contents,
+            'username':comment.user.username,
+            'likes':comment.likes,
+        }
+        data ={
+            'data':comm
+        }
+
+    return JsonResponse(data)
 
 @login_required
 def remove_from_cart_c(request,slug):

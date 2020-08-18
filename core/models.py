@@ -61,6 +61,10 @@ class Comments(models.Model):
     def get_posted_time(self):
         pass
 
+    def get_like_comment_url(self):
+        return reverse("core:like_the_comment",kwargs={
+            'id':self.id,
+        })
 
 class OrderItem(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,

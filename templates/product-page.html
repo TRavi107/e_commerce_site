@@ -107,14 +107,14 @@
                   
                         <ul class="list-inline d-sm-flex my-0">
                           <li class="list-inline-item g-mr-20">
-                            <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#!">
+                            <a id="like-count" data-url="{{ comment.get_like_comment_url }}" class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="{{ comment.get_like_comment_url }}">
                               <i class="fa fa-thumbs-up g-pos-rel g-top-1 g-mr-3"></i>
-                              {{comment.likes}}
+                              <span id="likes-text">{{comment.likes}}</span>
                             </a>
                           </li>
                           <li class="list-inline-item g-mr-20">
                             <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#!">
-                              <i class="fa fa-thumbs-down g-pos-rel g-top-1 g-mr-3"></i>
+                              <i class="fa fa-thumbs-down g-pos-rel g-top-1 g-mr-3" ></i>
                               {{comment.dislikes}}
                             </a>
                           </li>
@@ -187,3 +187,6 @@
   </footer>
   <!--/.Footer-->
 {% endblock %}
+
+
+
