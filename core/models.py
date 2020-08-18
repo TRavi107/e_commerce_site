@@ -49,10 +49,17 @@ class Comments(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                             on_delete=models.CASCADE,blank=True,null=True)
     contents = models.CharField(max_length=1000)
-    item = models.ForeignKey(Items,on_delete=models.CASCADE)
+    item = models.ForeignKey(Items,on_delete=models.CASCADE,blank=True,null=True)
     posted_time = models.TimeField(auto_now_add=True)
     likes = models.IntegerField(default=0)
     dislikes = models.IntegerField(default=0)
+    parent = models.ForeignKey(
+        'self',
+        on_delete=models.CASCADE,
+        related_name="replies",
+        blank=True,
+        null=True
+    )
 
     def __str__(self):
         return self.contents

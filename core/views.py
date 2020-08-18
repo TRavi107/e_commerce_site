@@ -50,9 +50,16 @@ class  ItemDetailView(DetailView):
         return context
 
     def post(self,*args,**kwargs):
+        if 'ReplyForm' in self.request.POST:
+            parent_id = self.request.POST.get('parent_id')
+
+        else :
+            parent_id=None
+
         form = CommentForm(self.request.POST or None)
-        item = self.get_object()
+
         if form.is_valid() :
+            item = self.get_object()
             contents = form.cleaned_data.get("contents")
             if self.request.user.is_authenticated:
                 user = self.request.user
@@ -61,7 +68,8 @@ class  ItemDetailView(DetailView):
             comment = Comments(
                 user=user,
                 contents=contents,
-                item = item
+                item = item,
+                parent_id = parent_id
             )
             comment.save()
             return redirect(".")
@@ -248,6 +256,7 @@ def like_the_comment(request,id):
             'contents':comment.contents,
             'username':comment.user.username,
             'likes':comment.likes,
+            'parent':comment.parent_id
         }
         data ={
             'data':comm
