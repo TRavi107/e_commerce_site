@@ -1,13 +1,23 @@
 $(document).ready(function(){
-    $("#like-count").click(function(e){
-        e.preventDefault()
-      const likes = document.getElementById('likes-text')
+    $('.like-form').submit(function(e){
+
+      e.preventDefault()
+      const post_id = $(this).attr('id')
+      const likebtn = $(`.like-btn${post_id}`)
+      const url = $(this).attr('action')
       $.ajax({
-        url:$("#like-count").data('url'),
-        method:'GET',
+        type:'POST',
+        url:url,
+        data:{
+          'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+          'id':post_id
+        },
         success:function(response){
-          likes.innerHTML =response.data.likes
+          likebtn.html(response.data.likes)
+        },
+        error:function(error){
+          
         }
       })
-    });
+    })
   })
