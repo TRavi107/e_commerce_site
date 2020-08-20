@@ -264,6 +264,23 @@ def like_the_comment(request,id):
 
     return JsonResponse(data)
 
+def dislike_the_comment(request,id):
+    comment = get_object_or_404(Comments,id=id)
+    if comment != None:
+        comment.dislikes +=1
+        comment.save()
+        comm ={
+            'contents':comment.contents,
+            'username':comment.user.username,
+            'dislikes':comment.dislikes,
+            'parent':comment.parent_id
+        }
+        data ={
+            'data':comm
+        }
+
+    return JsonResponse(data)
+
 @login_required
 def remove_from_cart_c(request,slug):
     item = get_object_or_404(Items,slug=slug)

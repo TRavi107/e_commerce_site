@@ -73,6 +73,11 @@ class Comments(models.Model):
             'id':self.id,
         })
 
+    def get_dislike_comment_url(self):
+        return reverse("core:dislike_the_comment",kwargs={
+            'id':self.id,
+        })
+
 class OrderItem(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                             on_delete=models.CASCADE)

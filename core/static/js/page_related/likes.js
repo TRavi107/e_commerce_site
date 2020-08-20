@@ -1,6 +1,5 @@
 $(document).ready(function(){
     $('.like-form').submit(function(e){
-
       e.preventDefault()
       const post_id = $(this).attr('id')
       const likebtn = $(`.like-btn${post_id}`)
@@ -20,4 +19,6 @@ $(document).ready(function(){
         }
       })
     })
+
+    
   })

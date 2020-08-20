@@ -117,9 +117,9 @@
                             </form>
                           </li>
                           <li class="list-inline-item g-mr-20">
-                            <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#!">
+                            <a data-url="{{ comment.get_dislike_comment_url }}" id="dislike-btn{{comment.id}}" onclick="clicked({{comment.id}})" >
                               <i class="fa fa-thumbs-down g-pos-rel g-top-1 g-mr-3" ></i>
-                              {{comment.dislikes}}
+                              <span id="dislike-txt{{comment.id}}">{{comment.dislikes}}</span>
                             </a>
                           </li>
                           <li class="list-inline-item ml-auto">
@@ -260,6 +260,26 @@
 {% endblock %}
 
 
+{% block script %}
+<script>
+  function clicked(id){
+    //const id = $(this).attr('id')
+    const dislike_btn = document.getElementById(`dislike-btn${id}`)
+    const url = dislike_btn.getAttribute('data-url')
+    const dislike_txt = document.getElementById(`dislike-txt${id}`)
 
+    $.ajax({
+      type:'GET',
+      url:url,
+      success:function(response){
+        dislike_txt.innerHTML = response.data.dislikes
+      },
+      error:function(error){
+        
+      }
+    })
+  }
+</script>
+{% endblock %}
 
 
